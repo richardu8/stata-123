@@ -1,0 +1,9 @@
+# 数据、日志与产出不入库
+*.dta
+*.log
+*.smcl
+*.bak
+outputs/
+.statamcp/
+dist/
+.DS_Store

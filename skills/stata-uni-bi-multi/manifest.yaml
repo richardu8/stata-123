@@ -1,0 +1,5 @@
+name: stata-uni-bi-multi
+version: 1.0.0
+description: "用 Stata 对二分类因变量做单变量、双变量、多变量（logistic 回归，报告 OR）三步分析，结果写入 Markdown"
+category: data-analysis
+author: richardu8
