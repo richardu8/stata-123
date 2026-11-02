@@ -1,0 +1,57 @@
+# 测试案例：名称 ;; expect=OK 或出错代码 ;; 参数=值 ……
+# 参数与模板参数区同名；值中的 | 为 blocks 的分组符
+# 回归测试：与 1.1.0 相同的参数
+x_logit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade wage ;; xcat=race married south
+x_probit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; model=probit ;; y=union ;; xcont=age grade ;; xcat=race married
+x_lpm ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; model=lpm ;; y=union ;; xcont=age grade wage ;; xcat=race married
+x_mpois ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; model=mpoisson ;; y=union ;; xcont=age grade wage ;; xcat=race married
+x_ols ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; y=wage ;; xcont=age grade ;; xcat=race married south
+x_ologit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=ordinal ;; y=gradecat ;; xcont=age wage ;; xcat=race married
+x_oprob ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=ordinal ;; model=oprobit ;; y=gradecat ;; xcont=age wage ;; xcat=race married
+x_mlogit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=nominal ;; y=race ;; xcont=age wage ;; xcat=married south
+x_nb ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=count ;; y=hours ;; xcont=age grade ;; xcat=race married
+x_pois ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=count ;; model=poisson ;; y=hours ;; xcont=age grade ;; xcat=race married
+k_expo ;; expect=OK ;; data=inputs/census.dta ;; ytype=count ;; y=death ;; xcont=medage ;; xcat=region ;; exposure=pop
+x_cox ;; expect=OK ;; data=inputs/cancer.dta ;; ytype=survival ;; y=died ;; xcont=age ;; xcat=drug ;; time=studytime
+b_auto ;; expect=OK ;; data=inputs/auto.dta ;; ytype=binary ;; y=foreign ;; xcont=price mpg weight ;; xcat=rep78
+b_clus ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade ;; xcat=race married ;; vce=cluster industry
+t_ref ;; expect=OK ;; data=inputs/nlsw88.dta ;; y=union ;; xcont= ;; xcat=ib2.race married
+# 新模型
+n_qreg ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=qreg ;; y=wage ;; xcont=age grade ;; xcat=race married
+n_qreg25 ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=qreg ;; quantile=0.25 ;; vce=robust ;; y=wage ;; xcont=age grade ;; xcat=race married
+n_tobit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=tobit ;; ll=0 ;; y=tenure ;; xcont=age grade ;; xcat=race married
+n_tobitr ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=tobit ;; ll=0 ;; vce=robust ;; y=tenure ;; xcont=age grade ;; xcat=race married
+n_zinb ;; expect=OK ;; data=inputs/fish.dta ;; ytype=count ;; model=zinb ;; y=count ;; xcont=child ;; xcat=camper ;; inflate=persons
+n_zip ;; expect=OK ;; data=inputs/fish.dta ;; ytype=count ;; model=zip ;; y=count ;; xcont=child ;; xcat=camper ;; inflate=persons
+n_weib ;; expect=OK ;; data=inputs/cancer.dta ;; ytype=survival ;; model=weibull ;; y=died ;; xcont=age ;; xcat=drug ;; time=studytime
+n_crreg ;; expect=OK ;; data=inputs/hypoxia.dta ;; ytype=survival ;; model=crreg ;; y=failtype ;; compete=2 ;; xcont=ifp tumsize ;; xcat=pelnode ;; time=dftime
+# 新功能
+f_blocks ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade wage ;; xcat=race married south ;; blocks=age race | grade wage | married south
+f_welch ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade wage ;; xcat=race married south ;; unequal=1
+f_welchc ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; y=wage ;; xcont=age ;; xcat=married race ;; unequal=1
+f_mlblk ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=nominal ;; y=race ;; xcont=age wage ;; xcat=married south ;; blocks=age wage | married south
+f_zinbblk ;; expect=OK ;; data=inputs/fish.dta ;; ytype=count ;; model=zinb ;; y=count ;; xcont=child ;; xcat=camper ;; inflate=persons ;; blocks=child | camper
+# 抽样设计（NHANES II）
+s_bin ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=binary ;; y=highbp ;; xcont=age weight hdresult ;; xcat=sex race rural ;; wt=finalwgt ;; psu=psuid ;; strata=stratid
+s_cont ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=continuous ;; y=bpsystol ;; xcont=age hdresult ;; xcat=sex race ;; wt=finalwgt ;; psu=psuid ;; strata=stratid
+s_ord ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=ordinal ;; y=health ;; xcont=age weight ;; xcat=sex rural ;; wt=finalwgt ;; psu=psuid ;; strata=stratid
+s_nom ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=nominal ;; y=race ;; xcont=age weight ;; xcat=sex rural ;; wt=finalwgt ;; psu=psuid ;; strata=stratid
+s_cnt ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=count ;; y=houssiz ;; xcont=age ;; xcat=sex race ;; wt=finalwgt ;; psu=psuid ;; strata=stratid
+s_blk ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=binary ;; y=highbp ;; xcont=age weight hdresult ;; xcat=sex race rural ;; wt=finalwgt ;; psu=psuid ;; strata=stratid ;; blocks=age sex | race rural | weight hdresult
+s_wtonly ;; expect=OK ;; data=inputs/nhanes2f.dta ;; ytype=binary ;; y=highbp ;; xcont=age ;; xcat=sex race ;; wt=finalwgt
+# 出错路径
+e_qsvy ;; expect=198 ;; data=inputs/nhanes2f.dta ;; ytype=continuous ;; model=qreg ;; y=bpsystol ;; xcont=age ;; xcat=sex ;; wt=finalwgt
+e_qclus ;; expect=198 ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=qreg ;; y=wage ;; xcont=age ;; xcat=race ;; vce=cluster industry
+e_crnc ;; expect=198 ;; data=inputs/hypoxia.dta ;; ytype=survival ;; model=crreg ;; y=failtype ;; xcont=ifp ;; xcat=pelnode ;; time=dftime
+e_tobnl ;; expect=198 ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=tobit ;; y=tenure ;; xcont=age ;; xcat=race
+e_blkx ;; expect=198 ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade ;; xcat=race ;; blocks=age | grade wage | race
+e_blk1 ;; expect=198 ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age grade ;; xcat=race ;; blocks=age grade race
+e_survsvy ;; expect=198 ;; data=inputs/cancer.dta ;; ytype=survival ;; y=died ;; xcont=age ;; xcat=drug ;; time=studytime ;; wt=age
+e_svyvce ;; expect=198 ;; data=inputs/nhanes2f.dta ;; ytype=binary ;; y=highbp ;; xcont=age ;; xcat=sex ;; wt=finalwgt ;; vce=robust
+e_compcox ;; expect=198 ;; data=inputs/cancer.dta ;; ytype=survival ;; y=died ;; xcont=age ;; xcat=drug ;; time=studytime ;; compete=2
+e_toblow ;; expect=459 ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; model=tobit ;; ll=1 ;; y=tenure ;; xcont=age ;; xcat=race
+e_inflnb ;; expect=198 ;; data=inputs/fish.dta ;; ytype=count ;; y=count ;; xcont=child ;; xcat=camper ;; inflate=persons
+e_welch2 ;; expect=198 ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=union ;; xcont=age ;; xcat=race ;; unequal=2
+e_crbad ;; expect=459 ;; data=inputs/hypoxia.dta ;; ytype=survival ;; model=crreg ;; y=failtype ;; compete=3 ;; xcont=ifp ;; xcat=pelnode ;; time=dftime
+m_ols ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=continuous ;; y=wage ;; xcont=age grade tenure ;; xcat=union race
+m_logit ;; expect=OK ;; data=inputs/nlsw88.dta ;; ytype=binary ;; y=collgrad ;; xcont=age wage tenure ;; xcat=union race

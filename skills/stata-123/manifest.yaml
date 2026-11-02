@@ -1,0 +1,5 @@
+name: stata-123
+version: 2.0.0
+description: "用 Stata 依次做单变量、双变量、多变量三步分析，因变量类型作参数，支持 17 种回归模型、复杂抽样设计与逐步加入变量，结果写入 Markdown"
+category: data-analysis
+author: richardu8

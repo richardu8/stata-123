@@ -7,3 +7,5 @@ outputs/
 .statamcp/
 dist/
 .DS_Store
+tests/work/
+__pycache__/
