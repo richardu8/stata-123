@@ -3,10 +3,11 @@
 向 AI 说明数据文件、因变量与自变量，即可由 Stata 依次完成三步分析，结果写成论文可用的表格。名字中的 1、2、3 即单变量、双变量、多变量。
 
 ```text
-用 stata-123 分析 inputs/clhls2021_analysis.dta：
-因变量 disabled（二分类）；连续自变量 age edu；分类自变量 female urban a51。
-结果写入“CLHLS2021-ADL失能影响因素分析.md”文末，标题为“五、数据分析结果”。
+用 stata-123 分析 data/mydata.dta：
+因变量 disabled（二分类）；连续自变量 age edu；分类自变量 female urban。
 ```
+
+数据文件与变量名换成自己的即可。
 
 适用于 WorkBuddy、Claude Code、Codex 等支持技能（`SKILL.md`）的 AI 工作台。
 
@@ -79,6 +80,7 @@
 | 计数数据有暴露量 | “暴露量 pyears” |
 | 生存数据 | “失效变量 died，生存时间 studytime” |
 | 竞争风险 | “生存时间 dftime，failtype 取 1 为关注事件、2 为竞争事件” |
+| 写进已有的报告 | “结果写入 report.md 文末，标题为‘数据分析结果’” |
 
 没有说明的按缺省处理：
 - 分类变量以取值最小的类别为参照组；
